@@ -15,10 +15,11 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
   
         print("Task from class")
-        dayNumber(number: 25)
+        dayNumber(number: 8)
         print("=========================")
         print("Task: String E1")
-        countChars()
+        let myName = "Ksusha"
+        countChars(name: myName)
         print("=========================")
         print("Task: String E2")
         userName(firstName: "Kseniia", lastName: "Poternak")
@@ -50,13 +51,13 @@ class ViewController: UIViewController {
         deleteDictElement(dict: students, key: "Masha")
         print("=========================")
         print("Task: String H1")
-        withSpace(name: "TungFam") // ?
+        withSpace(name: "TungFam")
         print("=========================")
         print("Task: String H2")
         reverse(word: "Hello")
         print("=========================")
         print("Task: String H3")
-        addCommas(number: 12345679) // ?
+        addCommas(number: 12344655679)
         print("=========================")
         print("Task: String H4")
         passSecurity(word: "helloCat5!")
@@ -79,24 +80,30 @@ class ViewController: UIViewController {
         let doubleDict = ["FirstD": dict1, "SecondD": dict2]
         method3(findHere: doubleDict, wordKey: "One")
     }
-    
-// Во ViewDidLoad создать словарь внутри которого будет 2 словаря (ключ - строка, значение - словарь). С любыми данными. Их мы будем передавать в метод, который напишем. Создать метод который будет принимать как параметры: словарь (такого типа как выше) и строку. Данный метод должен вернуть значение которое хранится внутри элемента ключ которого был передан как аргумент.
+// Collections Hard, task 4.
+/* Во ViewDidLoad создать словарь внутри которого будет 2 словаря (ключ - строка, значение - словарь). С любыми данными.
+    Их мы будем передавать в метод, который напишем. Создать метод который будет принимать как параметры:
+    словарь (такого типа как выше) и строку. Данный метод должен вернуть значение которое хранится внутри
+    элемента ключ которого был передан как аргумент. */
     
     func method3(findHere: [String: [String: Int]], wordKey: String) -> Int {
+        /* Знаком восклицания делается утверждение,
+         что значение существует, nil'a не будет. */
         var i = findHere["FirstD"]
         if i![wordKey] == nil {
             var x = findHere["SecondD"]
-            print("The key \"\(wordKey)\" opens: \(x![wordKey]).") // Не поняла, что означает синтаксис с восклицательным знаком, но без него выводит ошибку.
+            print("The key \"\(wordKey)\" opens: \(x![wordKey]!).")
             return (x![wordKey])!
         } else {
-            print("The key \"\(wordKey)\" opens: \(i![wordKey]).")
+            print("The key \"\(wordKey)\" opens: \(i![wordKey]!).")
             return (i![wordKey])!
         }
     }
     
+// Collections Hard, task 3.
 // сортировка массива не встроенным методом по возрастанию + удалить дубликаты.
     
-    func sorting() { // Bubble sorting.
+    func sorting() { // Bubble sorting - разобрала.
         let array4 = [3, 6, 1, 2, 2, 6, 13, 77, 36]
         print("Default array: \(array4).")
         let arrayWithoutDouble = Array(Set(array4))
@@ -119,6 +126,7 @@ class ViewController: UIViewController {
         print("Sorted array: \(sorted as Array).")
     }
     
+// Collections Hard, task 2.
 // метод который выведет все ключи словаря + метод который выведет все значения словаря.
     
     func keyPrint() {
@@ -133,8 +141,9 @@ class ViewController: UIViewController {
             print(value)
         }
     }
-    
-// Создать метод который принимает 2 аргумента: массив строк и просто строку. Метод возвращает true или false в зависимости есть ли данный элемент (тот второй аргумент, который строка) в массиве (тот первый аргумент, который массив строк).
+// Collections Hard, task 1.
+/* Создать метод который принимает 2 аргумента: массив строк и просто строку. Метод возвращает true или false
+     в зависимости есть ли данный элемент (тот второй аргумент, который строка) в массиве (тот первый аргумент, который массив строк). */
     
     func checkArray(arr: [String], str: String) -> Bool {
         if arr.contains(str) {
@@ -145,7 +154,8 @@ class ViewController: UIViewController {
             return false
         }
     }
-    
+   
+// String Hard, task 4.
 // проверить пароль на надежность от 1 до 5.
     
     func passSecurity (word: String) {
@@ -176,19 +186,25 @@ class ViewController: UIViewController {
         print("Your password is secure for \(count) from 5.")
     }
     
-// Добавить запятые в строку как их расставляет калькулятор. - NOT READY :C
+// String Hard, task 3.
+// Добавить запятые в строку как их расставляет калькулятор.
     
     func addCommas(number: Int) {
         var stringNumber = String(number)
+        let loops = stringNumber.count % 3
+        var commas = 0
         var i = 0
-        for _ in 0..<stringNumber.count { // Не выходит правильно подобрать рендж или i для цикла.
-            stringNumber.insert(",", at: stringNumber.index(stringNumber.endIndex, offsetBy: -3 * i))
-//            i += 1
+        for _ in 0...loops {
+            i = i + 3 + commas
+            stringNumber.insert(",", at: stringNumber.index(stringNumber.endIndex, offsetBy: -i))
+            commas = 1
         }
         print(stringNumber)
     }
-    
-// Создать метод который принимает как аргумент строку. Метод выводит строку зеркально, например Ось -> ьсО, Привет -> тевирП. не используя reverse (сделать алгоритм самому посимвольно).
+
+// String Hard, task 2.
+/* Создать метод который принимает как аргумент строку. Метод выводит строку зеркально, например Ось -> ьсО, Привет -> тевирП.
+ не используя reverse (сделать алгоритм самому посимвольно). */
     
     func reverse(word: String) {
         var newWord = ""
@@ -197,23 +213,40 @@ class ViewController: UIViewController {
         }
         print(newWord)
     }
-    
-// Создать метод который будет принимать строку где слитно написано Ваши ИмяФамилия “TungFam" и возвращать строку,  где они будут разделены пробелом. - NOT READY :C
+   
+// String Hard, task 1.
+// Создать метод который будет принимать строку где слитно написано Ваши ИмяФамилия “TungFam" и возвращать строку,  где они будут разделены пробелом.
     
     func withSpace (name: String) {
-   
+        let array = Array(name)
+        let upperLetter = CharacterSet.lowercaseLetters
+        let upperRange = Array(name.components(separatedBy: upperLetter).joined())
+        guard let i = upperRange.last else { return }
+        if let index = array.index(of: i) {
+            let firstName = String(array.prefix(upTo: index))
+            let lastName = String(array.suffix(from: index))
+            let namyWithSpace = firstName + " " + lastName
+            print(namyWithSpace)
+        } else {
+            print("Sorry, \(array) doesn't have \(i) element.")
+        }
     }
     
-// Создать словарь в котором ключ будет Строкой а значение Целым. Например ключ - имя, значение - возраст. Должно быть 3 элемента (3 пары). Создать метод который будет иметь 2 параметра: словарь (типа “Строка : Целое”) и ключ типа Строка. Данный метод должен удалить из полученного (как первый аргумент) словаря элемент ключ которого был передан (как второй аргумент).
+// Collection easy, task 6.
+/* Создать словарь в котором ключ будет Строкой а значение Целым. Например ключ - имя, значение - возраст.
+ Должно быть 3 элемента (3 пары). Создать метод который будет иметь 2 параметра: словарь (типа “Строка : Целое”) и ключ типа Строка.
+ Данный метод должен удалить из полученного (как первый аргумент) словаря элемент ключ которого был передан (как второй аргумент). */
     
     func deleteDictElement(dict: [String: Int], key: String) {
-        print("Here are 3 students: \(dict).")
+        print("Here are \(dict.count) students: \(dict).")
         var newStudents = dict
         newStudents.removeValue(forKey: key)
-        print("Here are 2 students: \(newStudents) without \(key).")
+        print("Here are \(newStudents.count) students: \(newStudents) without \(key).")
     }
     
-// Создать словарь в котором ключ будет Строкой а значение Целым. Например ключ - имя, значение - возраст. Должно быть 3 элемента (3 пары). Добавить в данный словарь еще 2 новых элемента.
+// Collection easy, task 5.
+/* Создать словарь в котором ключ будет Строкой а значение Целым. Например ключ - имя, значение - возраст.
+ Должно быть 3 элемента (3 пары). Добавить в данный словарь еще 2 новых элемента. */
     
     func dictionary() {
         var kids = ["Ivan": 3,
@@ -227,23 +260,27 @@ class ViewController: UIViewController {
         // kids["Natasha"] = 9
         print("And we add two new kids: \(kids).")
     }
-    
-// Создать массив с любыми значениями типа строка. Создать метод который будет принимать как аргумент массив. Метод должен возвращать массив который состоит из первого и последнего элемента массива, который был параметром.
+   
+// Collection easy, task 4.
+/* Создать массив с любыми значениями типа строка. Создать метод который будет принимать как аргумент массив.
+ Метод должен возвращать массив который состоит из первого и последнего элемента массива, который был параметром. */
     
     func method2(element: [String]) {
         let lastItem = element[2]
         let newArray = [element[0], lastItem]
         print(newArray)
     }
-    
-// Создать массив с любыми значениями типа строка. Создать метод который будет принимать как аргумент массив. Метод должен выводить в консоль элементы массива (по одному в одной строке).
+// Collection easy, task 3.
+/* Создать массив с любыми значениями типа строка. Создать метод который будет принимать как аргумент массив.
+ Метод должен выводить в консоль элементы массива (по одному в одной строке). */
     
     func method1(element:[String]) {
         for i in element {
             print(i)
         }
     }
-    
+ 
+// Collection easy, task 2.
 // Создать 2 массива со значениями типа Int. Сделать соединение данных массивов. Результат вывести в консоль.
     
     func merge() {
@@ -252,7 +289,8 @@ class ViewController: UIViewController {
         let mergedArray = array1 + array2
         print("The array of two other: \(mergedArray).")
     }
- 
+    
+// Collection easy, task 1.
 // Создать массив со значениями типа Int. Выполнить удаление всех элементов массива.
     
     func deleteElements() {
@@ -260,8 +298,10 @@ class ViewController: UIViewController {
         array.removeAll()
         print("Array is empty.")
     }
- 
-// Создать строку с именем и своим отчеством. Создать метод который проверит его на окончание “ич/на”. Выводит “М” или “Ж” в зависимости от окончания. Также учитывать регистр букв, то есть ИЧ или Ич или На и тд.
+
+// String easy, task 3.
+/* Создать строку с именем и своим отчеством. Создать метод который проверит его на окончание “ич/на”.
+ Выводит “М” или “Ж” в зависимости от окончания. Также учитывать регистр букв, то есть ИЧ или Ич или На и тд. */
     
     func checkEndOfString() {
         let name = "Ксения АлександровИЧ"
@@ -275,7 +315,9 @@ class ViewController: UIViewController {
         }
     }
 
-// Написать метод который принимает 2 слова, например имя и фамилию, возвращает юзернейм который имеет буквы нижнего регистра и разделяет имя и фамилию символом “_”.
+// String easy, task 2.
+/* Написать метод который принимает 2 слова, например имя и фамилию,
+    возвращает юзернейм который имеет буквы нижнего регистра и разделяет имя и фамилию символом “_”. */
     
     func userName(firstName: String, lastName: String) {
         let silentName = firstName.lowercased()
@@ -283,20 +325,22 @@ class ViewController: UIViewController {
         print("My user name is \(silentName)_\(silentLast)")
     }
 
-// Создать строку со своим именем. Написать метод который получает это имя и возвращает кол-во символов в строке с вашим именем. Возвращенное значение показать в консоль.
+// String easy, task 1.
+// Создать строку со своим именем. Написать метод который получает это имя и возвращает кол-во символов в строке с вашим именем.
     
-    func countChars() {
-        let name = "Ksusha"
-        print("My name \(name) has \(name.count) characters.")
+    func countChars(name: String) {
+        let amountChar = name.count
+        print("Name \(name) has \(amountChar) characters.")
     }
     
+// Class task.
 // Написать метод, в который передается номер дня (1-7) и в консоль выводится день недели + UPD.
     
     func dayNumber(number: Int) {
-        let week = ["", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        let week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
         let result = number % 7
         if result == 0 {
-            print("\(number) is \(week[7]).")
+            print("\(number) is \(week[0]).")
             
         } else {
         print("\(number) is \(week[result]).")
